@@ -1,0 +1,40 @@
+@import '../../styles/exports';
+
+.toast-host {
+  @include full-screen;
+  @include flex-center;
+
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 99999;
+
+  &.--on {
+    opacity: 1;
+  }
+
+  >.span-host {
+    padding: 15px;
+
+    color: $gray-0;
+    font-size: 18px;
+    font-weight: bold;
+
+    border-radius: 10px;
+    background-color: $light-blue-800;
+
+    pointer-events: all;
+
+    &.--debug {
+      background-color: $green-800;
+    }
+    &.--warn {
+      background-color: $yellow-800;
+    }
+    &.--error {
+      background-color: $red-900;
+    }
+    &.--fatal {
+      background-color: $gray-1000;
+    }
+  }
+}

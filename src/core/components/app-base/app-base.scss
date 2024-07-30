@@ -1,0 +1,7 @@
+@import '../../styles/default';
+@import '../../styles/exports/';
+
+.app-base-host {
+  @include full-screen;
+  @include flex-center;
+}

@@ -1,0 +1,39 @@
+$space: 10px;
+
+@mixin full-screen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin flex-center($flex-direction: row) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin size($width: 0px, $height: 0px) {
+  width: $width;
+  height: $height;
+}
+
+@mixin font($size: 20px, $color: #333, $weight: normal, $family: 'Noto Sans KR') {
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+  font-family: $family;
+}
+
+@mixin clickable {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+@mixin disabled {
+  filter: grayscale(100%) !important;
+  opacity: 0.5 !important;
+  pointer-events: none !important;
+}

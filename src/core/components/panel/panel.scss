@@ -1,0 +1,6 @@
+@import '../../styles/exports';
+
+.panel-host {
+  width: var(--width, unset);
+  height: var(--height, unset);
+}

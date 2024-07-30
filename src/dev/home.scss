@@ -1,0 +1,6 @@
+@import '/src/core/styles/exports/';
+
+.home-host {
+  @include full-screen;
+  @include flex-center(column);
+}

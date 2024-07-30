@@ -1,0 +1,25 @@
+@import '../../styles/exports';
+
+.button-host {
+  @include flex-center;
+  @include clickable;
+
+  position: relative;
+  width: var(--width, unset);
+  height: var(--height, unset);
+
+  border: none;
+
+  background-color: transparent;
+  background-image: var(--image-url, unset);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: var(--width, unset) var(--height, unset);
+  overflow: hidden;
+  outline: 0;
+
+  >.title {
+    color: $gray-1000;
+    font-weight: bold;
+  }
+}
