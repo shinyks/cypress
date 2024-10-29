@@ -152,12 +152,22 @@ export class Element<Props extends ElementProps = ElementProps> {
     return this.element.parentElement ? true : false;
   }
 
-  appendChildElement(element: HTMLElement, index?: number): void {
-    dom.append(element, this.element, index);
+  appendChildElement(element?: HTMLElement | null, index?: number): void {
+    if (element) {
+      dom.append(element, this.element, index);
+    }
   }
 
   getChildElement(query: string): HTMLElement | null {
     return dom.get(query, this.element);
+  }
+
+  getData(key: string): string | null {
+    return this.element.dataset[key] ?? null;
+  }
+
+  setData(key: string, value: string): void {
+    this.element.dataset[key] = value;
   }
 
   setOption(name: string, value: boolean = true): void {
