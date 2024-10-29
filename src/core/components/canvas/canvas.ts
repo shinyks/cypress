@@ -111,7 +111,9 @@ export class Canvas<Props extends CanvasProps = CanvasProps> extends Component<P
     this.context.clearRect(0, 0, width, height);
   }
 
-  stroke(color: string = '#000', width: number = 1, dash: Iterable<number> = []): Canvas {
+  stroke(color: string = '#000', width: number = 1, dash: Iterable<number> = [], opacity: number = 1, compositeOperation: GlobalCompositeOperation = 'source-over'): Canvas {
+    this.context.globalCompositeOperation = compositeOperation;
+    this.context.globalAlpha = opacity;
     this.context.lineCap = 'round';
     this.context.lineJoin = 'round';
     this.context.lineWidth = width;
@@ -122,7 +124,9 @@ export class Canvas<Props extends CanvasProps = CanvasProps> extends Component<P
     return this;
   }
 
-  fill(color: string = '#000'): Canvas {
+  fill(color: string = '#000', opacity: number = 1, compositeOperation: GlobalCompositeOperation = 'source-over'): Canvas {
+    this.context.globalCompositeOperation = compositeOperation;
+    this.context.globalAlpha = opacity;
     this.context.fillStyle = color;
     this.context.fill();
 
