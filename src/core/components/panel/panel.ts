@@ -4,22 +4,17 @@ import { name, style } from '../../element';
 import { Component, ComponentProps } from '../../component';
 
 export interface PanelProps extends ComponentProps {
-  width?: number;
-  height?: number;
+  size?: Size;
 }
 
 export class Panel<Props extends PanelProps = PanelProps> extends Component<Props> {
-  get width(): number {
-    return this.props.width ?? 0;
-  }
-
-  get height(): number {
-    return this.props.height ?? 0;
+  get size(): Size {
+    return this.props.size ?? Size.default;
   }
 
   constructor(props: Props) {
     super({ ...props, ...style(styles, props), ...name('Panel', props) });
 
-    this.css.setSize(new Size(this.width, this.height));
+    this.css.setSize(this.size);
   }
 }
