@@ -1,5 +1,5 @@
 import styles from './page-wrapper.scss';
-import { Size } from '@shinyks/daisy';
+import { Size, string } from '@shinyks/daisy';
 import { name, style } from '../../element';
 import { Component, ComponentProps } from '../../component';
 import { Span } from '../span/span';
@@ -24,7 +24,8 @@ export interface RouteInfo {
 
 export interface PageWrapperProps extends ComponentProps {
   scaleInfo?: ScaleInfo;
-  routes?: RouteInfo[]
+  routes?: RouteInfo[];
+  allowUserHashControl?: boolean;
 }
 
 export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> extends Component<Props> {
@@ -40,6 +41,10 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
 
   set routes(routes: RouteInfo[]) {
     this.props.routes = routes;
+  }
+
+  get allowUserHashControl(): boolean {
+    return this.props.allowUserHashControl ?? true;
   }
 
   get scaleWidth(): number {
@@ -102,6 +107,10 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
     return search;
   }
 
+  get urlQueryObject(): any {
+    return this.searchStringToObject(this.urlSearch);
+  }
+
   constructor(props: Props) {
     super({ ...props, ...style(styles, props), ...name('PageWrapper', props), autoId: true });
 
@@ -130,27 +139,44 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
     this.css.set('transform', `scale(${zoomRate}, ${zoomRate})`);
   }
 
+  updateScaleInfo({ width, height, marginTop, marginRight, marginBottom, marginLeft, hCenter, vCenter }: ScaleInfo): void {
+    this.pageScale.targetSize = new Size(width, height);
+    this.pageScale.marginTop = marginTop ?? 0;
+    this.pageScale.marginRight = marginRight ?? 0;
+    this.pageScale.marginBottom = marginBottom ?? 0;
+    this.pageScale.marginLeft = marginLeft ?? 0;
+    this.pageScale.hCenter = hCenter ?? true;
+    this.pageScale.vCenter = vCenter ?? true;
+
+    this.updateLayout();
+  }
+
   setRoutes(routes: RouteInfo[]): void {
     this.routes = routes;
 
-    const { urlHash, urlSearch } = this;
-    const queryList = this.stringToRecordList(urlSearch);
+    if (!this.allowUserHashControl) {
+      this.goDefault();
+
+      return;
+    }
+
+    const { urlHash, urlQueryObject } = this;
 
     if (urlHash) {
-      this.go(this.urlHash, queryList);
+      this.go(this.urlHash, urlQueryObject);
     } else {
-      this.goDefault(queryList);
+      this.goDefault(urlQueryObject);
     }
   }
 
-  go(path: string, queryList: Record<string, string>[] = []): void {
+  go(path: string, queryObject: any = {}): void {
     const route = this.getRoute(path);
 
     if (route) {
       let path = '';
 
-      if (queryList.length !== 0) {
-        path += `?${this.recordListToString(queryList)}`;
+      if (Object.entries(queryObject).length !== 0) {
+        path += `?${this.objectToSearchString(queryObject)}`;
       }
 
       path += `#${route.path}`;
@@ -162,8 +188,8 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
     }
   }
 
-  goDefault(queryList: Record<string, string>[] = []): void {
-    this.go(this.defaultRoutePath, queryList);
+  goDefault(queryObject: any = {}): void {
+    this.go(this.defaultRoutePath, queryObject);
   }
 
   getRoute(path: string): RouteInfo | null {
@@ -177,34 +203,28 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
     return route;
   }
 
-  stringToRecordList(searchString: string): Record<string, string>[] {
-    const recordList: Record<string, string>[] = [];
+  searchStringToObject(searchString: string): any {
+    const searchObject: any = {};
     const pairList = searchString.split('&');
 
     pairList.forEach((pair) => {
       const chunks = pair.split('=');
       const key = chunks[0];
       const value = chunks[1];
-      const object = {};
 
       if (key && value) {
-        (object as any)[key] = value;
-
-        recordList.push(object);
+        searchObject[string.to.camelCase(key)] = value;
       }
     });
 
-    return recordList;
+    return searchObject;
   }
 
-  recordListToString(recordList: Record<string, string>[]): string {
+  objectToSearchString(searchObject: any): string {
     const searchList: string[] = [];
 
-    recordList.forEach((record) => {
-      const key = Object.keys(record)[0];
-      const value = Object.values(record)[0];
-
-      searchList.push(`${key}=${value}`);
+    Object.entries(searchObject).forEach(([key, value]) => {
+      searchList.push(`${string.to.kebabCase(key)}=${value}`);
     });
 
     return searchList.join('&');

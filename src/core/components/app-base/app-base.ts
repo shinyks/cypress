@@ -33,11 +33,11 @@ export class AppBase<Props extends AppBaseProps = AppBaseProps> extends Componen
     this.pageWrapper.setRoutes(routes);
   }
 
-  go(path: string, queryList: Record<string, string>[] = []): void {
+  go(path: string, queryList: any = {}): void {
     this.pageWrapper.go(path, queryList);
   }
 
-  goDefault(queryList: Record<string, string>[] = []): void {
+  goDefault(queryList: any = {}): void {
     this.pageWrapper.goDefault(queryList);
   }
 }
