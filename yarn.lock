@@ -1178,10 +1178,10 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@shinyks/daisy@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@shinyks/daisy/-/daisy-0.1.3.tgz#8d42c2af18cce97af012615a8d59c6c74488ba2b"
-  integrity sha512-5bK/6+jXqDdBZ71vkAfMU7OjOvJ6wUcYNRGr+464Xvlabknjv0RjE/OYtaOi/84qpl2cQywObR1zs+PirgiHdw==
+"@shinyks/daisy@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@shinyks/daisy/-/daisy-0.1.4.tgz#5652eaaa2444862067e2772a2d816d321f85d7ef"
+  integrity sha512-+agvxG+FuKCYM70r431IwPg82aJY0vx4FSuK7/VVlqKdzjATdFDB/93/1yBBE+UDLD2CmVz7MwwEigyHOxGNew==
   dependencies:
     buffer "^6.0.3"
     stream-browserify "^3.0.0"

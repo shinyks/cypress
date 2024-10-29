@@ -58,7 +58,7 @@
     "webpack-dev-server": "^4.13.2"
   },
   "dependencies": {
-    "@shinyks/daisy": "0.1.3",
+    "@shinyks/daisy": "0.1.4",
     "uuid": "^9.0.0"
   }
 }
