@@ -29,4 +29,4 @@ class AssetLoader {
   }
 }
 
-export default new AssetLoader();
+export const assetLoader = new AssetLoader();
