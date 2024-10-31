@@ -1,4 +1,5 @@
-@import '../../styles/exports';
+@use '../../styles/exports/colors' as *;
+@use '../../styles/exports/mixins' as *;
 
 .toast-host {
   @include full-screen;

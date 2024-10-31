@@ -48,9 +48,7 @@ const config: Configuration = {
             loader: "style-loader",
             options: {
               injectType: "lazyStyleTag",
-              insert: function (element: HTMLElement, options: any): void {
-                (options.target || document.head).appendChild(element);
-              },
+              insert: require.resolve("./scripts/webpack-style-insert"),
             },
           },
           'css-loader',

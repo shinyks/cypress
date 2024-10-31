@@ -1,4 +1,4 @@
-@import '../../styles/exports';
+@use '../../styles/exports/colors' as *;
 
 .span-host {
   color: $gray-900;

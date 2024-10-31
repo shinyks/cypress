@@ -1,5 +1,5 @@
-@import '../../styles/default';
-@import '../../styles/exports/';
+@use '../../styles/default';
+@use '../../styles/exports/mixins' as *;
 
 .app-base-host {
   @include full-screen;

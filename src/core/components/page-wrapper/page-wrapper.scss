@@ -1,4 +1,4 @@
-@import '../../styles/exports';
+@use '../../styles/exports/mixins' as *;
 
 .page-wrapper-host {
   @include flex-center;
