@@ -1,5 +1,5 @@
 import styles from './page-scaler.scss';
-import { Point, Size } from '@shinyks/daisy';
+import { calc, Point, Size } from '@shinyks/daisy';
 import { name, style } from '../../element';
 import { Component, ComponentProps } from '../../component';
 
@@ -134,6 +134,6 @@ export class PageScaler<Props extends PageScalerProps = PageScalerProps> extends
       }
     }
 
-    this.zoomRate = Math.round(this.zoomRate * 1000000) / 1000000;
+    this.zoomRate = calc.round(this.zoomRate, 6);
   }
 }
