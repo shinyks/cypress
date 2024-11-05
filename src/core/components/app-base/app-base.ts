@@ -8,6 +8,7 @@ import { Toast } from '../toast/toast';
 export interface AppBaseProps extends ComponentProps {
   scaleInfo?: ScaleInfo;
   allowUserHashControl?: boolean;
+  useScale?: boolean;
 }
 
 export class AppBase<Props extends AppBaseProps = AppBaseProps> extends Component<Props> {
@@ -20,6 +21,10 @@ export class AppBase<Props extends AppBaseProps = AppBaseProps> extends Componen
 
   get allowUserHashControl(): boolean {
     return this.props.allowUserHashControl ?? true;
+  }
+
+  get useScale(): boolean {
+    return this.props.useScale ?? true;
   }
 
   get zoomRate(): number {
@@ -35,12 +40,16 @@ export class AppBase<Props extends AppBaseProps = AppBaseProps> extends Componen
 
     window.addEventListener('resize', this.onResize.bind(this));
 
-    this.pageWrapper = this.addChild(PageWrapper, { scaleInfo: this.scaleInfo, allowUserHashControl: this.allowUserHashControl });
+    const { scaleInfo, allowUserHashControl, useScale } = this;
+
+    this.pageWrapper = this.addChild(PageWrapper, { scaleInfo, allowUserHashControl, useScale });
     this.toast = this.addChild(Toast);
   }
 
   onResize(): void {
-    this.pageWrapper.updateLayout();
+    if (this.useScale) {
+      this.pageWrapper.updateLayout();
+    }
   }
 
   updateScaleInfo(scaleInfo: ScaleInfo): void {

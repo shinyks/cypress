@@ -1,5 +1,5 @@
 import styles from './page-scaler.scss';
-import { dom, Point, Size } from '@shinyks/daisy';
+import { Point, Size } from '@shinyks/daisy';
 import { name, style } from '../../element';
 import { Component, ComponentProps } from '../../component';
 
@@ -16,6 +16,7 @@ export interface ScaleInfo {
 export interface PageScalerProps extends ComponentProps {
   scaleInfo?: ScaleInfo;
   allowUserHashControl?: boolean;
+  useScale?: boolean;
 }
 
 export class PageScaler<Props extends PageScalerProps = PageScalerProps> extends Component<Props> {
@@ -32,6 +33,10 @@ export class PageScaler<Props extends PageScalerProps = PageScalerProps> extends
 
   get allowUserHashControl(): boolean {
     return this.props.allowUserHashControl ?? true;
+  }
+
+  get useScale(): boolean {
+    return this.props.useScale ?? true;
   }
 
   get viewportSize(): Size {
@@ -75,6 +80,10 @@ export class PageScaler<Props extends PageScalerProps = PageScalerProps> extends
   }
 
   updateLayout(): void {
+    if (!this.useScale) {
+      return;
+    }
+
     this.calculateZoomRate();
 
     const { viewportPoint, viewportSize, zoomRate } = this;

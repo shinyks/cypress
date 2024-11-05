@@ -2,10 +2,10 @@
 
 .page-scaler-host {
   position: absolute;
-  top: var(--top, unset);
-  left: var(--left, unset);
-  width: var(--width, unset);
-  height: var(--height, unset);
+  top: var(--top, 0);
+  left: var(--left, 0);
+  width: var(--width, 100%);
+  height: var(--height, 100%);
 
   transform: var(--transform, unset);
   transform-origin: left top;
