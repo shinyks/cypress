@@ -1,4 +1,5 @@
 export * from './app-base/app-base';
+export * from './page-scaler/page-scaler';
 export * from './page-wrapper/page-wrapper';
 
 export * from './button/button';
