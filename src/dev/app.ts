@@ -1,13 +1,14 @@
 import html from './app.html';
+import { Size } from '@shinyks/daisy';
 import { name, template } from "../core/element";
 import { AppBase } from "../core/components";
-import { RouteInfo, ScaleInfo } from '../core/components/page-wrapper/page-wrapper';
+import { ScaleInfo } from '../core/components/page-scaler/page-scaler';
+import { RouteInfo } from '../core/components/page-wrapper/page-wrapper';
 import { Home } from './home';
 import { About } from './about';
 
 const scaleInfo: ScaleInfo = {
-  width: 1920,
-  height: 1080,
+  viewportSize: new Size(1920, 1080),
 };
 
 const routes: RouteInfo[] = [

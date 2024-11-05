@@ -1,7 +1,8 @@
 import styles from './app-base.scss';
 import { name, style } from "../../element";
 import { Component, ComponentProps } from "../../component";
-import { PageWrapper, RouteInfo, ScaleInfo } from '../page-wrapper/page-wrapper';
+import { ScaleInfo } from '../page-scaler/page-scaler';
+import { PageWrapper, RouteInfo } from '../page-wrapper/page-wrapper';
 import { Toast } from '../toast/toast';
 
 export interface AppBaseProps extends ComponentProps {
@@ -22,7 +23,7 @@ export class AppBase<Props extends AppBaseProps = AppBaseProps> extends Componen
   }
 
   get zoomRate(): number {
-    return this.pageWrapper.pageScale.zoomRate;
+    return this.pageWrapper.zoomRate;
   }
 
   get urlQueryObject(): any {

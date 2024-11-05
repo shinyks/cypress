@@ -1,4 +1,4 @@
-@import '/src/core/styles/exports/';
+@use '/src/core/styles/exports/mixins' as *;
 
 .about-host {
   @include full-screen;

@@ -1,6 +1,8 @@
-@import '/src/core/styles/exports/';
+@use '/src/core/styles/exports/mixins' as *;
 
 .home-host {
   @include full-screen;
   @include flex-center(column);
+
+  background-color: #ccc;
 }

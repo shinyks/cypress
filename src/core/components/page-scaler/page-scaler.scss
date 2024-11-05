@@ -1,0 +1,12 @@
+@use '../../styles/exports/mixins' as *;
+
+.page-scaler-host {
+  position: absolute;
+  top: var(--top, unset);
+  left: var(--left, unset);
+  width: var(--width, unset);
+  height: var(--height, unset);
+
+  transform: var(--transform, unset);
+  transform-origin: left top;
+}

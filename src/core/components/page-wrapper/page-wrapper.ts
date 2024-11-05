@@ -1,20 +1,8 @@
 import styles from './page-wrapper.scss';
-import { Size, string } from '@shinyks/daisy';
+import { string } from '@shinyks/daisy';
 import { name, style } from '../../element';
-import { Component, ComponentProps } from '../../component';
+import { PageScaler, PageScalerProps } from '../page-scaler/page-scaler';
 import { Span } from '../span/span';
-import { PageToFit } from '../../utils/page-to-fit';
-
-export interface ScaleInfo {
-  width?: number;
-  height?: number;
-  marginTop?: number;
-  marginRight?: number;
-  marginBottom?: number;
-  marginLeft?: number;
-  hCenter?: boolean;
-  vCenter?: boolean;
-}
 
 export interface RouteInfo {
   path: string;
@@ -22,19 +10,12 @@ export interface RouteInfo {
   default?: boolean;
 }
 
-export interface PageWrapperProps extends ComponentProps {
-  scaleInfo?: ScaleInfo;
+export interface PageWrapperProps extends PageScalerProps {
   routes?: RouteInfo[];
   allowUserHashControl?: boolean;
 }
 
-export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> extends Component<Props> {
-  pageScale!: PageToFit;
-
-  get scaleInfo(): ScaleInfo {
-    return this.props.scaleInfo ?? {};
-  }
-
+export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> extends PageScaler<Props> {
   get routes(): RouteInfo[] {
     return this.props.routes ?? [];
   }
@@ -45,42 +26,6 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
 
   get allowUserHashControl(): boolean {
     return this.props.allowUserHashControl ?? true;
-  }
-
-  get scaleWidth(): number {
-    return this.scaleInfo.width ?? 1280;
-  }
-
-  get scaleHeight(): number {
-    return this.scaleInfo.height ?? 720;
-  }
-
-  get scaleSize(): Size {
-    return new Size(this.scaleWidth, this.scaleHeight);
-  }
-
-  get marginTop(): number {
-    return this.scaleInfo.marginTop ?? 0;
-  }
-
-  get marginRight(): number {
-    return this.scaleInfo.marginRight ?? 0;
-  }
-
-  get marginBottom(): number {
-    return this.scaleInfo.marginBottom ?? 0;
-  }
-
-  get marginLeft(): number {
-    return this.scaleInfo.marginLeft ?? 0;
-  }
-
-  get hCenter(): boolean {
-    return this.scaleInfo.hCenter ?? true;
-  }
-
-  get vCenter(): boolean {
-    return this.scaleInfo.vCenter ?? true;
   }
 
   get defaultRoutePath(): string {
@@ -114,41 +59,11 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
   constructor(props: Props) {
     super({ ...props, ...style(styles, props), ...name('PageWrapper', props), autoId: true });
 
-    this.initPageScale();
     this.initDefaultComponent();
-    this.updateLayout();
-  }
-
-  initPageScale(): void {
-    const { marginTop, marginRight, marginBottom, marginLeft, hCenter, vCenter } = this;
-
-    this.pageScale = new PageToFit(this.scaleSize, marginTop, marginRight, marginBottom, marginLeft, hCenter, vCenter);
   }
 
   initDefaultComponent(): void {
     this.addChild(Span, { text: 'Page load failed' });
-  }
-
-  updateLayout(): void {
-    this.pageScale.calculateZoomRate();
-
-    const { targetPoint, targetSize, zoomRate } = this.pageScale;
-
-    this.css.setPoint(targetPoint);
-    this.css.setSize(targetSize);
-    this.css.set('transform', `scale(${zoomRate}, ${zoomRate})`);
-  }
-
-  updateScaleInfo({ width, height, marginTop, marginRight, marginBottom, marginLeft, hCenter, vCenter }: ScaleInfo): void {
-    this.pageScale.targetSize = new Size(width, height);
-    this.pageScale.marginTop = marginTop ?? 0;
-    this.pageScale.marginRight = marginRight ?? 0;
-    this.pageScale.marginBottom = marginBottom ?? 0;
-    this.pageScale.marginLeft = marginLeft ?? 0;
-    this.pageScale.hCenter = hCenter ?? true;
-    this.pageScale.vCenter = vCenter ?? true;
-
-    this.updateLayout();
   }
 
   setRoutes(routes: RouteInfo[]): void {
