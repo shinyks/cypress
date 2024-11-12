@@ -94,7 +94,7 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
         path += `?${this.objectToSearchString(queryObject)}`;
       }
 
-      if (!this.allowUserHashControl) {
+      if (this.allowUserHashControl) {
         path += `#${route.path}`;
       }
 

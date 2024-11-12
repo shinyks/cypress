@@ -18,7 +18,7 @@ const routes: RouteInfo[] = [
 
 export class App extends AppBase {
   constructor() {
-    super({ scaleInfo, ...template(html), ...name('App'), autoId: true });
+    super({ scaleInfo, ...template(html), ...name('App'), autoId: true, allowUserHashControl: false });
 
     this.setRoutes(routes);
   }
