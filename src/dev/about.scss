@@ -3,4 +3,6 @@
 .about-host {
   @include full-screen;
   @include flex-center(column);
+
+  border: 10px solid #000;
 }

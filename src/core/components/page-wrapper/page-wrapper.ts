@@ -12,6 +12,7 @@ export interface RouteInfo {
 
 export interface PageWrapperProps extends PageScalerProps {
   routes?: RouteInfo[];
+  allowUserHashControl?: boolean;
 }
 
 export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> extends PageScaler<Props> {
@@ -21,6 +22,10 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
 
   set routes(routes: RouteInfo[]) {
     this.props.routes = routes;
+  }
+
+  get allowUserHashControl(): boolean {
+    return this.props.allowUserHashControl ?? true;
   }
 
   get defaultRoutePath(): string {
@@ -89,7 +94,9 @@ export class PageWrapper<Props extends PageWrapperProps = PageWrapperProps> exte
         path += `?${this.objectToSearchString(queryObject)}`;
       }
 
-      path += `#${route.path}`;
+      if (!this.allowUserHashControl) {
+        path += `#${route.path}`;
+      }
 
       window.history.pushState('', '', path);
 

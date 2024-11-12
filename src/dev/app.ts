@@ -16,7 +16,7 @@ const routes: RouteInfo[] = [
   { path: 'about', component: About },
 ];
 
-class App extends AppBase {
+export class App extends AppBase {
   constructor() {
     super({ scaleInfo, ...template(html), ...name('App'), autoId: true });
 

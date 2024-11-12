@@ -15,7 +15,6 @@ export interface ScaleInfo {
 
 export interface PageScalerProps extends ComponentProps {
   scaleInfo?: ScaleInfo;
-  allowUserHashControl?: boolean;
   useScale?: boolean;
 }
 
@@ -29,10 +28,6 @@ export class PageScaler<Props extends PageScalerProps = PageScalerProps> extends
 
   set scaleInfo(value: ScaleInfo) {
     this.props.scaleInfo = value;
-  }
-
-  get allowUserHashControl(): boolean {
-    return this.props.allowUserHashControl ?? true;
   }
 
   get useScale(): boolean {
