@@ -44,6 +44,7 @@ export interface ElementProps {
   nameList?: string[];
   className?: string;
   tagName?: string;
+  namespace?: string;
   parentElement?: HTMLElement;
   siblingIndex?: number;
   template?: string;
@@ -75,6 +76,10 @@ export class Element<Props extends ElementProps = ElementProps> {
     return this.props.tagName ?? 'div';
   }
 
+  get namespace(): string {
+    return this.props.namespace ?? '';
+  }
+
   get parentElement(): HTMLElement {
     return this.props.parentElement ?? document.body;
   }
@@ -94,7 +99,7 @@ export class Element<Props extends ElementProps = ElementProps> {
   constructor(props: Props) {
     this.props = props;
 
-    this.element = this.createElement(this.tagName, this.className, this.id);
+    this.element = this.createElement(this.tagName, this.className, this.id, this.namespace);
     this.css = new Css(this.element);
 
     this.addName();
