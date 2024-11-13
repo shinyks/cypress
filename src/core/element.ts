@@ -128,8 +128,8 @@ export class Element<Props extends ElementProps = ElementProps> {
     });
   }
 
-  createElement(tag: string = 'div', className: string = '', id: string = ''): HTMLElement {
-    return dom.create(tag, className, id);
+  createElement(tag: string = 'div', className: string = '', id: string = '', namespace: string = ''): HTMLElement {
+    return dom.create(tag, className, id, namespace);
   }
 
   appendElement(): void {

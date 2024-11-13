@@ -1161,10 +1161,10 @@
     "@parcel/watcher-win32-ia32" "2.4.1"
     "@parcel/watcher-win32-x64" "2.4.1"
 
-"@shinyks/daisy@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@shinyks/daisy/-/daisy-0.1.5.tgz#bd2428cfa1e5b099097f41cfdfa251bb44655b8d"
-  integrity sha512-s8oJoC1Bve/XNfW4v10VEiKjNJFNsMXb/F6JRQBUbUZE1+xnm5XF9v4gGyHNuO4bEu7tkrmXfyRrIrNvoPhsuA==
+"@shinyks/daisy@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@shinyks/daisy/-/daisy-0.1.6.tgz#4546348cac6fa75d7624d36060b16a8ee08a7f32"
+  integrity sha512-FHFrtdX5qqKA4qTDhihdS2smmbr2L0EFJ+ZojAvMEHYxBzyowxLMXl8UgrEPQEMLP9RQmElTv4Z2rUqlJXIgIg==
   dependencies:
     buffer "^6.0.3"
     stream-browserify "^3.0.0"
